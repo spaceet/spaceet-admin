@@ -93,7 +93,7 @@ export type AmenityProps = Node & {
 
 export type BookingProps = Node & {
 	__typename?: "Booking"
-	Property: PropertyProps
+	property: PropertyProps
 	endDate: Date | string
 	startDate: Date | string
 	user: UserProps
