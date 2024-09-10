@@ -64,6 +64,14 @@ export type UserProps = Node & {
 	phoneNumber: string
 	role: "user" | "host"
 }
+export type AdminProps = Node & {
+	__typename?: "Admin"
+	email: string
+	firstName: string
+	lastName: string
+	phoneNumber: string
+	access: "admin" | "editor" | "superadmin"
+}
 
 export type PropertyProps = Node & {
 	__typename?: "Property"
