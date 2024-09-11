@@ -69,7 +69,6 @@ export type AdminProps = Node & {
 	email: string
 	firstName: string
 	lastName: string
-	phoneNumber: string
 	access: "admin" | "editor" | "superadmin"
 }
 

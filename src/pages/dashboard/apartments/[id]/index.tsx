@@ -9,7 +9,7 @@ const Page = () => {
 
 	return (
 		<DashboardLayout>
-			<div>Property {id}</div>
+			<div>Apartment {id}</div>
 		</DashboardLayout>
 	)
 }
