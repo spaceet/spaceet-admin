@@ -88,6 +88,10 @@ h6 {
 	font-family: var(--heading);
 }
 
+a {
+	width: fit-content;
+}
+
 a,
 p,
 span,

@@ -21,7 +21,7 @@ export const DashboardLayout = ({ children }: Props) => {
 	const [open, setOpen] = React.useState(false)
 	const router = useRouter()
 
-	const isOnRoute = (path: string) => router.pathname === normalized(path)
+	const isOnRoute = (path: string) => normalized(router.pathname) === path
 
 	return (
 		<div className="grid h-screen w-screen grid-cols-6">

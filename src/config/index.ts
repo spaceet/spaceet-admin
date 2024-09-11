@@ -1,5 +1,6 @@
 export * from "./currency"
 export * from "./endpoints"
+export * from "./icon"
 export * from "./links"
 export * from "./states"
 export * from "./table"

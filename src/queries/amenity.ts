@@ -1,11 +1,11 @@
-import { AmenityProps, HttpResponse, Pagination } from "@/types"
+import { AmenitiesIconName, AmenityProps, HttpResponse, Pagination } from "@/types"
 import { PaginationDto } from "./property"
 import { endpoints } from "@/config"
 import { axios } from "@/lib"
 
 export interface AddAmenityDto {
 	description: string
-	icon: string
+	icon: AmenitiesIconName | (string & {})
 	name: string
 }
 
