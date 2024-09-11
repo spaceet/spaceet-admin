@@ -1,4 +1,5 @@
 export * from "./appbar"
 export * from "./data-table"
 export * from "./loader"
+export * from "./seo"
 export * from "./spinner"

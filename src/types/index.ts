@@ -64,6 +64,13 @@ export type UserProps = Node & {
 	phoneNumber: string
 	role: "user" | "host"
 }
+export type AdminProps = Node & {
+	__typename?: "Admin"
+	email: string
+	firstName: string
+	lastName: string
+	access: "admin" | "editor" | "superadmin"
+}
 
 export type PropertyProps = Node & {
 	__typename?: "Property"
@@ -93,7 +100,7 @@ export type AmenityProps = Node & {
 
 export type BookingProps = Node & {
 	__typename?: "Booking"
-	Property: PropertyProps
+	property: PropertyProps
 	endDate: Date | string
 	startDate: Date | string
 	user: UserProps

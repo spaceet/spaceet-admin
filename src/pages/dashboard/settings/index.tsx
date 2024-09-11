@@ -1,12 +1,16 @@
 import React from "react"
 
 import { DashboardLayout } from "@/components/layout/dashboard"
+import { Seo } from "@/components/shared"
 
 const Page = () => {
 	return (
-		<DashboardLayout>
-			<div>Settings</div>
-		</DashboardLayout>
+		<>
+			<Seo title="Settings" />
+			<DashboardLayout>
+				<div>Settings</div>
+			</DashboardLayout>
+		</>
 	)
 }
 
