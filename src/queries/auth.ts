@@ -7,6 +7,7 @@ export interface CreateAdminDto {
 	firstName: string
 	lastName: string
 	access: "admin" | "editor" | "superadmin"
+	password: string
 }
 
 export interface SignInDto {
