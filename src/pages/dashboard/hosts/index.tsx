@@ -1,18 +1,14 @@
-import { useRouter } from "next/router"
 import React from "react"
 
 import { DashboardLayout } from "@/components/layout/dashboard"
 import { Seo } from "@/components/shared"
 
 const Page = () => {
-	const router = useRouter()
-	const { id } = router.query
-
 	return (
 		<>
-			<Seo title="Booking" />
+			<Seo title="Hosts" />
 			<DashboardLayout>
-				<div>Booking {id}</div>
+				<div>Hosts</div>
 			</DashboardLayout>
 		</>
 	)
