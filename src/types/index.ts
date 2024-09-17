@@ -1,4 +1,4 @@
-import { currencyCodes } from "@/config"
+import { amenities_list, currencyCodes } from "@/config"
 
 export type Maybe<T> = T | null
 
@@ -133,33 +133,4 @@ export type NotificationProps = Node & {
 	type: "success" | "error" | "info" | "warning"
 }
 
-export const amenitiesIconNames = [
-	"air-conditioner",
-	"airport",
-	"balcony",
-	"bath",
-	"bed",
-	"cable",
-	"dishwasher",
-	"elevator",
-	"fitness",
-	"fireplace",
-	"free-wifi",
-	"garden",
-	"handicap-accessible",
-	"heating",
-	"jacuzzi",
-	"kitchen",
-	"laundry",
-	"max-guests",
-	"microwave",
-	"parking",
-	"pet-friendly",
-	"ps5",
-	"refrigerator",
-	"security-system",
-	"streaming-service",
-	"swimming-pool",
-] as const
-
-export type AmenitiesIconName = (typeof amenitiesIconNames)[number]
+export type AmenitiesIconName = (typeof amenities_list)[number]

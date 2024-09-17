@@ -5,8 +5,8 @@ import React from "react"
 
 import { DashboardLayout } from "@/components/layout/dashboard"
 import { AddAmenityDto, AddAmenityMutation } from "@/queries"
+import { Icon, Seo, Spinner } from "@/components/shared"
 import { Textarea } from "@/components/ui/textarea"
-import { Seo, Spinner } from "@/components/shared"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -68,10 +68,10 @@ const Page = () => {
 										<SelectValue placeholder="Select an icon" />
 									</SelectTrigger>
 									<SelectContent>
-										{amenities_icons.map(({ label, icon: Icon }) => (
+										{amenities_icons.map(({ label }) => (
 											<SelectItem key={label} value={label}>
 												<div className="flex items-center gap-2">
-													<Icon className="size-4" />
+													<Icon name={label} />
 													<span className="">{label}</span>
 												</div>
 											</SelectItem>
