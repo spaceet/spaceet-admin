@@ -7,6 +7,7 @@ export interface AddAmenityDto {
 	description: string
 	icon: AmenitiesIconName | (string & {})
 	name: string
+	type: "BASIC" | "SPECIAL" | "OTHER"
 }
 
 const GetAllAmenitiesQuery = async ({ limit, page }: PaginationDto) => {

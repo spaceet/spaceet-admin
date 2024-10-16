@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { AddAmenitySchema } from "@/schema"
 import { amenities_icons } from "@/config"
 import { queryClient } from "@/providers"
 import { HttpError } from "@/types"
@@ -25,6 +26,7 @@ const initialValues: AddAmenityDto = {
 	description: "",
 	icon: "",
 	name: "",
+	type: "BASIC",
 }
 
 const Page = () => {
@@ -45,8 +47,9 @@ const Page = () => {
 		},
 	})
 
-	const { handleChange, handleSubmit, setFieldValue } = useFormik({
+	const { errors, handleChange, handleSubmit, setFieldValue } = useFormik({
 		initialValues,
+		validationSchema: AddAmenitySchema,
 		onSubmit: (values) => {
 			console.log(values)
 		},
@@ -59,8 +62,14 @@ const Page = () => {
 				<div className="h-full w-full">
 					<div className="w-full max-w-[446px]">
 						<form onSubmit={handleSubmit} className="flex w-full flex-col gap-6">
-							<Input name="name" onChange={handleChange} label="Name" />
-							<Textarea name="description" onChange={handleChange} label="Description" height="h-44" />
+							<Input name="name" onChange={handleChange} label="Name" error={errors.name} />
+							<Textarea
+								name="description"
+								onChange={handleChange}
+								label="Description"
+								height="h-44"
+								error={errors.description}
+							/>
 							<div>
 								<Label htmlFor="icon">Icon</Label>
 								<Select onValueChange={(value) => setFieldValue("icon", value)}>
@@ -78,6 +87,21 @@ const Page = () => {
 										))}
 									</SelectContent>
 								</Select>
+								{errors.icon && <span className="text-sm text-red-500">{errors.icon}</span>}
+							</div>
+							<div>
+								<Label htmlFor="type">Amenity Class</Label>
+								<Select onValueChange={(value) => setFieldValue("type", value)}>
+									<SelectTrigger>
+										<SelectValue placeholder="Select amenity class" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="BASIC">Basic</SelectItem>
+										<SelectItem value="SPECIAL">Special</SelectItem>
+										<SelectItem value="OTHERS">Others</SelectItem>
+									</SelectContent>
+								</Select>
+								{errors.type && <span className="text-sm text-red-500">{errors.type}</span>}
 							</div>
 							<Button type="submit" disabled={isPending}>
 								{isPending ? <Spinner /> : "Save"}
