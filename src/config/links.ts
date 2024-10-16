@@ -1,38 +1,53 @@
-// import {} from ""
+import {
+	RiAdminLine,
+	RiBarChartBoxLine,
+	RiBookMarkedLine,
+	RiHotelBedLine,
+	RiLightbulbFlashLine,
+	RiMoneyDollarCircleLine,
+	RiSettingsLine,
+	RiUserLine,
+	RiUserLocationLine,
+} from "@remixicon/react"
 
 export const dashboard_links = [
 	{
-		section: "main",
+		section: "menu",
 		links: [
 			{
-				label: "Dashboard",
+				label: "Analytics",
 				path: "/dashboard",
-				icon: "",
+				icon: RiBarChartBoxLine,
+			},
+			{
+				label: "Guests",
+				path: "/dashboard/users",
+				icon: RiUserLine,
+			},
+			{
+				label: "Hosts",
+				path: "/dashboard/hosts",
+				icon: RiUserLocationLine,
+			},
+			{
+				label: "Listings",
+				path: "/dashboard/apartments",
+				icon: RiHotelBedLine,
 			},
 			{
 				label: "Bookings",
 				path: "/dashboard/bookings",
-				icon: "",
+				icon: RiBookMarkedLine,
 			},
 			{
-				label: "Apartments",
-				path: "/dashboard/apartments",
-				icon: "",
+				label: "Payments",
+				path: "/dashboard/payments",
+				icon: RiMoneyDollarCircleLine,
 			},
 			{
 				label: "Amenities",
 				path: "/dashboard/amenities",
-				icon: "",
-			},
-			{
-				label: "Users",
-				path: "/dashboard/users",
-				icon: "",
-			},
-			{
-				label: "Admins",
-				path: "/dashboard/admins",
-				icon: "",
+				icon: RiLightbulbFlashLine,
 			},
 		],
 	},
@@ -40,23 +55,14 @@ export const dashboard_links = [
 		section: "others",
 		links: [
 			{
-				label: "Messages",
-				path: "/dashboard/messages",
-				icon: "",
+				label: "Admins",
+				path: "/dashboard/admins",
+				icon: RiAdminLine,
 			},
 			{
-				label: "Notifications",
-				path: "/dashboard/notifications",
-				icon: "",
-			},
-			{
-				label: "Settings",
+				label: "Settings & Configuration",
 				path: "/dashboard/settings",
-				icon: "",
-			},
-			{
-				label: "Logout",
-				icon: "",
+				icon: RiSettingsLine,
 			},
 		],
 	},

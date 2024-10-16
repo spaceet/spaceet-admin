@@ -1,11 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
+import { format } from "date-fns"
 import Link from "next/link"
 
-import { BookingProps, PropertyProps, UserProps } from "@/types"
-import { Checkbox } from "@/components/ui/checkbox"
+import { BookingProps, ApartmentProps, UserProps } from "@/types"
 import { Button } from "@/components/ui/button"
-import { formatDate } from "@/lib"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -14,27 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export const booking_columns: ColumnDef<BookingProps>[] = [
-	{
-		id: "select",
-		header: ({ table }) => (
-			<Checkbox
-				checked={
-					table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
-				}
-				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-				aria-label="Select all"
-			/>
-		),
-		cell: ({ row }) => (
-			<Checkbox
-				checked={row.getIsSelected()}
-				onCheckedChange={(value) => row.toggleSelected(!!value)}
-				aria-label="Select row"
-			/>
-		),
-		enableSorting: false,
-		enableHiding: false,
-	},
 	{
 		accessorKey: "property",
 		header: "Property",
@@ -49,24 +27,24 @@ export const booking_columns: ColumnDef<BookingProps>[] = [
 		header: "User",
 		cell: ({ row }) => (
 			<Link href={`/dashboard/users/${row.original.user.id}`}>
-				{row.original.user.firstName} {row.original.user.lastName}
+				{row.original.user.first_name} {row.original.user.last_name}
 			</Link>
 		),
 	},
 	{
 		accessorKey: "price",
 		header: "Price",
-		cell: ({ row }) => <span>{row.original.property.price}</span>,
+		cell: ({ row }) => <span>{row.original.property.price.cost_per_night}</span>,
 	},
 	{
 		accessorKey: "startDate",
 		header: "Check-In",
-		cell: ({ row }) => <span>{formatDate(row.original.startDate)}</span>,
+		cell: ({ row }) => <span>{format(row.original.startDate, "")}</span>,
 	},
 	{
 		accessorKey: "endDate",
 		header: "Check-Out",
-		cell: ({ row }) => <span>{formatDate(row.original.endDate)}</span>,
+		cell: ({ row }) => <span>{format(row.original.endDate, "")}</span>,
 	},
 	{
 		id: "actions",
@@ -92,28 +70,7 @@ export const booking_columns: ColumnDef<BookingProps>[] = [
 	},
 ]
 
-export const property_columns: ColumnDef<PropertyProps>[] = [
-	{
-		id: "select",
-		header: ({ table }) => (
-			<Checkbox
-				checked={
-					table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
-				}
-				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-				aria-label="Select all"
-			/>
-		),
-		cell: ({ row }) => (
-			<Checkbox
-				checked={row.getIsSelected()}
-				onCheckedChange={(value) => row.toggleSelected(!!value)}
-				aria-label="Select row"
-			/>
-		),
-		enableSorting: false,
-		enableHiding: false,
-	},
+export const property_columns: ColumnDef<ApartmentProps>[] = [
 	{
 		accessorKey: "name",
 		header: "Name",
@@ -124,12 +81,12 @@ export const property_columns: ColumnDef<PropertyProps>[] = [
 	{
 		accessorKey: "location",
 		header: "Location",
-		cell: ({ row }) => <span>{row.original.location}</span>,
+		cell: ({ row }) => <span>{row.original.city}</span>,
 	},
 	{
 		accessorKey: "price",
 		header: "Price",
-		cell: ({ row }) => <span>{row.original.price}</span>,
+		cell: ({ row }) => <span>{row.original.price.cost_per_night}</span>,
 	},
 	{
 		accessorKey: "capacity",
@@ -138,8 +95,8 @@ export const property_columns: ColumnDef<PropertyProps>[] = [
 	},
 	{
 		accessorKey: "isAvailable",
-		header: "Available",
-		cell: ({ row }) => <span>{row.original.isAvailable}</span>,
+		header: "Availability",
+		cell: ({ row }) => <span>{row.original.is_available}</span>,
 	},
 	{
 		id: "actions",
@@ -167,40 +124,38 @@ export const property_columns: ColumnDef<PropertyProps>[] = [
 
 export const user_columns: ColumnDef<UserProps>[] = [
 	{
-		id: "select",
-		header: ({ table }) => (
-			<Checkbox
-				checked={
-					table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
-				}
-				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-				aria-label="Select all"
-			/>
-		),
+		accessorKey: "guestName",
+		header: "Guest Name",
 		cell: ({ row }) => (
-			<Checkbox
-				checked={row.getIsSelected()}
-				onCheckedChange={(value) => row.toggleSelected(!!value)}
-				aria-label="Select row"
-			/>
+			<span>
+				{row.original.first_name} {row.original.last_name}
+			</span>
 		),
-		enableSorting: false,
-		enableHiding: false,
-	},
-	{
-		accessorKey: "firstName",
-		header: "First Name",
-		cell: ({ row }) => <span>{row.original.firstName}</span>,
-	},
-	{
-		accessorKey: "lastName",
-		header: "Last Name",
-		cell: ({ row }) => <span>{row.original.lastName}</span>,
 	},
 	{
 		accessorKey: "email",
 		header: "Email",
 		cell: ({ row }) => <span>{row.original.email}</span>,
+	},
+	{
+		accessorKey: "phone_number",
+		header: "Phone Number",
+		cell: ({ row }) => <span>{row.original.phone_number}</span>,
+	},
+	{
+		accessorKey: "createdOn",
+		header: "Email",
+		cell: ({ row }) => <span>{format(row.original.createdOn, "MMM dd, yyyy | hh:mmaa")}</span>,
+	},
+	{
+		accessorKey: "status",
+		header: "Status",
+		cell: ({ row }) => (
+			<span
+				className={`w-fit rounded px-2 py-1 ${row.original.status ? "bg-green-100 text-green-700" : "bg-error-100 text-error-500"}`}>
+				{row.original.status ? "Active" : "Inactive"}
+			</span>
+		),
 	},
 	{
 		id: "actions",
@@ -209,15 +164,21 @@ export const user_columns: ColumnDef<UserProps>[] = [
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" className="h-8 w-8 p-0">
-							<span hidden className="sr-only">
-								Open menu
-							</span>
 							<MoreHorizontal className="h-4 w-4" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
 						<DropdownMenuItem>
-							<Link href={`/dashboard/users/${row.original.id}`}>View</Link>
+							<Link href={`/dashboard/users/edit/${row.original.id}`}>Edit Account</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href={`/dashboard/users/${row.original.id}`}>Suspend Account</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href={`/dashboard/users/booking-history/${row.original.id}`}>Booking History</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link href={`/dashboard/users/${row.original.id}`}>Delete Account</Link>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

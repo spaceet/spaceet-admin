@@ -1,24 +1,21 @@
 import { Maybe } from "@/types"
 
-const encodeQueryParams = (params: { [key: string]: string | number }) => {
-	return Object.keys(params)
-		.filter((key) => params[key] !== null && params[key] !== undefined && params[key] !== "")
-		.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key] as string)}`)
-		.join("&")
-}
-
-const endpoints = (path?: Maybe<string>, params?: { [key: string]: string | number }) => {
-	let queryString = ""
-	if (params) {
-		queryString = "?" + encodeQueryParams(params)
+const endpoints = (path?: Maybe<string>) => {
+	const amenities = {
+		get_all: `/admin/apartment/amenity`,
+		get_one: `/admin/apartment/amenity/${path}`,
+		create: `/admin/apartment/add-amenity`,
+		update: `/admin/apartment/amenity/${path}`,
+		delete: `/admin/apartment/amenity/${path}`,
 	}
 
-	const amenities = {
-		get_all: `/amenities${queryString}`,
-		get_one: `/amenities/${path}`,
-		create: `/amenities`,
-		update: `/amenities/${path}`,
-		delete: `/amenities/${path}`,
+	const apartment = {
+		get_all: `/apartment`,
+		get_one: `/apartment/${path}`,
+		search: `/apartment/search`,
+		create: `/apartment`,
+		update: `/apartment/${path}`,
+		delete: `/apartment/${path}`,
 	}
 
 	const auth = {
@@ -27,7 +24,7 @@ const endpoints = (path?: Maybe<string>, params?: { [key: string]: string | numb
 	}
 
 	const bookings = {
-		get_all: `/bookings${queryString}`,
+		get_all: `/bookings`,
 		get_one: `/bookings/${path}`,
 		create: `/bookings`,
 		update: `/bookings/${path}`,
@@ -35,24 +32,15 @@ const endpoints = (path?: Maybe<string>, params?: { [key: string]: string | numb
 	}
 
 	const payments = {
-		get_all: `/payments${queryString}`,
+		get_all: `/payments`,
 		get_one: `/payments/${path}`,
 		create: `/payments`,
 		update: `/payments/${path}`,
 		delete: `/payments/${path}`,
 	}
 
-	const properties = {
-		get_all: `/properties${queryString}`,
-		get_one: `/properties/${path}`,
-		search: `/properties/search${queryString}`,
-		create: `/properties`,
-		update: `/properties/${path}`,
-		delete: `/properties/${path}`,
-	}
-
 	const reviews = {
-		get_all: `/reviews${queryString}`,
+		get_all: `/reviews`,
 		get_one: `/reviews/${path}`,
 		create: `/reviews`,
 		update: `/reviews/${path}`,
@@ -60,8 +48,8 @@ const endpoints = (path?: Maybe<string>, params?: { [key: string]: string | numb
 	}
 
 	const users = {
-		get_all: `/users${queryString}`,
-		get_one: `/users/${path}`,
+		get_all: `/admin/users/all`,
+		get_one: `/admin/users/view-one/${path}`,
 		update: `/users/${path}`,
 		delete: `/users/${path}`,
 	}
@@ -71,7 +59,7 @@ const endpoints = (path?: Maybe<string>, params?: { [key: string]: string | numb
 		auth,
 		bookings,
 		payments,
-		properties,
+		apartment,
 		reviews,
 		users,
 	}
