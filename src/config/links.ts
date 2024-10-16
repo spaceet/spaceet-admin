@@ -2,6 +2,7 @@ import {
 	RiAdminLine,
 	RiBarChartBoxLine,
 	RiBookMarkedLine,
+	RiCreativeCommonsByLine,
 	RiHotelBedLine,
 	RiLightbulbFlashLine,
 	RiMoneyDollarCircleLine,
@@ -58,6 +59,11 @@ export const dashboard_links = [
 				label: "Admins",
 				path: "/dashboard/admins",
 				icon: RiAdminLine,
+			},
+			{
+				label: "Roles and Permissions",
+				path: "/dashboard/roles",
+				icon: RiCreativeCommonsByLine,
 			},
 			{
 				label: "Settings & Configuration",
