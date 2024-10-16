@@ -11,14 +11,7 @@ interface Props extends React.PropsWithChildren {}
 
 export const DashboardLayout = ({ children }: Props) => {
 	const router = useRouter()
-
 	const isOnRoute = (path: string) => normalized(router.pathname) === path
-
-	const header = React.useMemo(() => {
-		const route = normalized(router.pathname)
-		const links = dashboard_links.flatMap((item) => item.links)
-		return links.find((link) => link.path === route)!
-	}, [router.pathname])
 
 	return (
 		<div className="flex h-screen w-screen items-start">
@@ -46,7 +39,7 @@ export const DashboardLayout = ({ children }: Props) => {
 				</div>
 			</aside>
 			<div className="flex h-full w-full flex-1 flex-col">
-				<Appbar header={header} />
+				<Appbar />
 				<main className="h-[calc(100%-48px)] w-full overflow-hidden p-4">{children}</main>
 			</div>
 		</div>
