@@ -63,9 +63,9 @@ const Page = () => {
 		<>
 			<Seo title="Hosts" />
 			<DashboardLayout>
-				<div className="flex h-full w-full flex-col gap-10 overflow-y-auto px-5 py-[35px] lg:px-8">
-					<div className="flex w-full flex-col gap-5">
-						<div className="hidden w-full items-center justify-between lg:flex">
+				<div className="flex h-full w-full flex-col gap-4 overflow-y-auto px-4 py-1">
+					<div className="flex w-full flex-col gap-3">
+						<div className="flex w-full items-center justify-between">
 							<p>Overview</p>
 							<Select value={filter} onValueChange={setFilter}>
 								<SelectTrigger className="h-10 w-[130px] capitalize">
@@ -80,31 +80,31 @@ const Page = () => {
 								</SelectContent>
 							</Select>
 						</div>
-					</div>
-					<div className="hidden h-[135px] w-full items-center rounded-md border lg:flex">
-						<DataCard
-							direction="up"
-							icon={RiGroupLine}
-							label="Total Guests"
-							percentage={5.6}
-							value={15}
-						/>
-						<Separator orientation="vertical" className="h-[72px] bg-neutral-300" />
-						<DataCard
-							direction="up"
-							icon={RiUserFollowLine}
-							label="Active Guests"
-							percentage={5.6}
-							value={15}
-						/>
-						<Separator orientation="vertical" className="h-[72px] bg-neutral-300" />
-						<DataCard
-							direction="down"
-							icon={RiUserUnfollowLine}
-							label="Inactive Guests"
-							percentage={5.6}
-							value={15}
-						/>
+						<div className="flex h-[135px] w-full items-center rounded-md border">
+							<DataCard
+								direction="up"
+								icon={RiGroupLine}
+								label="Total Guests"
+								percentage={5.6}
+								value={15}
+							/>
+							<Separator orientation="vertical" className="h-[72px] bg-neutral-300" />
+							<DataCard
+								direction="up"
+								icon={RiUserFollowLine}
+								label="Active Guests"
+								percentage={5.6}
+								value={15}
+							/>
+							<Separator orientation="vertical" className="h-[72px] bg-neutral-300" />
+							<DataCard
+								direction="down"
+								icon={RiUserUnfollowLine}
+								label="Inactive Guests"
+								percentage={5.6}
+								value={15}
+							/>
+						</div>
 					</div>
 					<div className="flex w-full flex-col gap-4">
 						<div className="flex h-11 w-fit items-center rounded-lg border border-b p-1">

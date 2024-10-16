@@ -97,6 +97,7 @@ p,
 span,
 button {
 	font-family: var(--body);
+	outline: none;
 }
 
 /* Override WebKit autofill styles */

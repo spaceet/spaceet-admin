@@ -4,9 +4,11 @@ import {
 	RiCommandLine,
 	RiDownload2Line,
 	RiFilter3Line,
+	RiMore2Line,
 	RiSearch2Line,
 } from "@remixicon/react"
 
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { DashboardLayout } from "@/components/layout/dashboard"
 import { Button } from "@/components/ui/button"
 import { Seo } from "@/components/shared"
@@ -28,7 +30,6 @@ const Page = () => {
 	const [query, setQuery] = React.useState("")
 
 	const ref = React.useRef<HTMLInputElement>(null)!
-
 	useDebounce(query, 500)
 
 	const handleCommand = (e: KeyboardEvent) => {
@@ -46,10 +47,9 @@ const Page = () => {
 		document.addEventListener("keydown", handleCommand)
 		return () => document.removeEventListener("keydown", handleCommand)
 	})
-
 	return (
 		<>
-			<Seo title="Admins" />
+			<Seo title="Roles and Permissions" />
 			<DashboardLayout>
 				<div className="flex h-full w-full flex-col gap-4 px-4 py-1">
 					<div className="flex w-full items-center justify-between">
@@ -66,11 +66,11 @@ const Page = () => {
 						<Dialog open={open} onOpenChange={setOpen}>
 							<DialogTrigger asChild>
 								<Button>
-									<RiAddLine /> Add New Admin
+									<RiAddLine /> Add New Role
 								</Button>
 							</DialogTrigger>
 							<DialogContent>
-								<DialogTitle>Add New Admin</DialogTitle>
+								<DialogTitle>Add New Role</DialogTitle>
 								<DialogDescription hidden></DialogDescription>
 							</DialogContent>
 						</Dialog>
@@ -101,7 +101,31 @@ const Page = () => {
 								</Button>
 							</div>
 						</div>
-						<div className="h-auto w-full overflow-y-scroll"></div>
+						<div className="flex w-full flex-col gap-3">
+							<div className="grid h-[30px] w-full grid-cols-12 text-xs text-neutral-500">
+								<div className="col-span-4 flex h-full w-full items-center">ROLE</div>
+								<div className="col-span-6 flex h-full w-full items-center">PERMISSIONS</div>
+								<div className="flex h-full w-full items-center justify-center">USERS</div>
+								<div className="flex h-full w-full items-center"></div>
+							</div>
+							<div className="flex w-full flex-col gap-4">
+								{filters.map((filter, index) => (
+									<div key={index} className="grid h-[60px] w-full grid-cols-12 text-sm text-neutral-500">
+										<div className="col-span-4 flex h-full w-full items-center capitalize">{filter}</div>
+										<div className="col-span-6 flex h-full w-full items-center">Permissions</div>
+										<div className="flex h-full w-full items-center justify-center">{index + 1}</div>
+										<div className="flex h-full w-full items-center justify-center">
+											<Popover>
+												<PopoverTrigger>
+													<RiMore2Line />
+												</PopoverTrigger>
+												<PopoverContent className="mr-5 w-[200px]"></PopoverContent>
+											</Popover>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
 					</div>
 				</div>
 			</DashboardLayout>
