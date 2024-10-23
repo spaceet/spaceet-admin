@@ -69,19 +69,24 @@ export type Node = {
 
 export type UserProps = Node & {
 	__typename?: "User"
-	access_token: string
-	bio: Maybe<string>
-	email: string
-	first_name: string
-	isVerified: boolean
-	last_name: string
-	location: Maybe<string>
-	phone_number: string
-	profile_image: Undefined<string>
-	rating: number
-	signup_verified: boolean
-	status: "ACTIVE" | "INACTIVE" | "PENDING"
-	user_type: "USER" | "HOST"
+	users_access_token: string
+	users_createdOn: string | Date
+	users_deletedBy: Maybe<string>
+	users_deletedOn: Maybe<string | Date>
+	users_email: string
+	users_first_name: string
+	users_hostId: Maybe<string>
+	users_id: string
+	users_isDeleted: boolean
+	users_last_name: string
+	users_password: string
+	users_phone_number: string
+	users_profile_image?: string
+	users_signup_verified: boolean
+	users_status?: "ACTIVE" | "INACTIVE" | "PENDING"
+	users_updatedBy: Maybe<string>
+	users_updatedOn: string
+	users_user_type: "USER" | "HOST"
 }
 export type AdminProps = Node & {
 	__typename?: "Admin"
@@ -194,3 +199,13 @@ export type ChartDataProps = {
 	amount: number
 	users: number
 }
+
+export type TimelineProps =
+	| "YESTERDAY"
+	| "TODAY"
+	| "THIS_WEEK"
+	| "LAST_7_DAYS"
+	| "LAST_WEEK"
+	| "THIS_MONTH"
+	| "LAST_6_MONTHS"
+	| "LAST_12_MONTHS"

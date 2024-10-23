@@ -54,7 +54,7 @@ const Loading = ({ className, size, variant }: Props) => {
 		<div
 			aria-label="loading"
 			role="spinbutton"
-			className="fixed left-0 top-0 !z-50 grid h-screen w-screen place-items-center bg-white">
+			className="fixed left-0 top-0 !z-50 grid h-full w-full place-items-center bg-white">
 			<svg className={cn(loaderVariants({ className, size, variant }))} viewBox="3 3 18 18">
 				<path
 					className="opacity-20"

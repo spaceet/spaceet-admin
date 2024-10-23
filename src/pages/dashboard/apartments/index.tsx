@@ -1,4 +1,4 @@
-import { useQueries } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import React from "react"
 import {
 	RiCalendarCheckLine,
@@ -11,9 +11,12 @@ import {
 
 import { DashboardLayout } from "@/components/layout/dashboard"
 import { DataCard, Pagination, Seo } from "@/components/shared"
+import { GetPropertiesOverviewQuery } from "@/queries"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
+import { TimelineProps } from "@/types"
 import { useDebounce } from "@/hooks"
+import { timeline } from "@/config"
 import {
 	Select,
 	SelectContent,
@@ -22,13 +25,11 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 
-const filters = ["all", "last 7 days", "last 30 days", "last 60 days", "last 90 days"] as const
-const filters2 = ["all", "booked", "vacant"] as const
-type Filter = (typeof filters)[number] | (string & {})
-type Filter2 = (typeof filters2)[number]
+const filters = ["all", "booked", "vacant"] as const
+type Filter = (typeof filters)[number]
 
 const Page = () => {
-	const [filter2, setFilter2] = React.useState<Filter2>("all")
+	const [timelineFilter, setTimelineFilter] = React.useState<TimelineProps>("LAST_12_MONTHS")
 	const [filter, setFilter] = React.useState<Filter>("all")
 	const [limit, setLimit] = React.useState(10)
 	const [query, setQuery] = React.useState("")
@@ -38,8 +39,9 @@ const Page = () => {
 
 	useDebounce(query, 500)
 
-	const [] = useQueries({
-		queries: [],
+	const {} = useQuery({
+		queryFn: () => GetPropertiesOverviewQuery(limit, page, timelineFilter),
+		queryKey: ["get-properties-overview", limit, page, timelineFilter],
 	})
 
 	const handleCommand = (e: KeyboardEvent) => {
@@ -66,14 +68,16 @@ const Page = () => {
 					<div className="flex w-full flex-col gap-3">
 						<div className="flex w-full items-center justify-between">
 							<p>Overview</p>
-							<Select value={filter} onValueChange={setFilter}>
+							<Select
+								value={timelineFilter}
+								onValueChange={(value: TimelineProps) => setTimelineFilter(value)}>
 								<SelectTrigger className="h-10 w-[130px] capitalize">
 									<SelectValue />
 								</SelectTrigger>
 								<SelectContent className="capitalize">
-									{filters.map((filter) => (
-										<SelectItem key={filter} value={filter}>
-											{filter}
+									{timeline.map((filter) => (
+										<SelectItem key={filter.value} value={filter.value}>
+											{filter.label}
 										</SelectItem>
 									))}
 								</SelectContent>
@@ -101,11 +105,11 @@ const Page = () => {
 					</div>
 					<div className="flex w-full flex-col gap-4">
 						<div className="flex h-11 w-fit items-center rounded-lg border border-b p-1">
-							{filters2.map((item) => (
+							{filters.map((item) => (
 								<button
 									key={item}
-									onClick={() => setFilter2(item)}
-									className={`relative flex flex-1 items-center justify-center rounded-md px-4 py-2 text-xs capitalize lg:min-w-[107px] lg:text-sm ${item === filter2 ? "bg-primary-100 text-white" : "bg-transparent"}`}>
+									onClick={() => setFilter(item)}
+									className={`relative flex flex-1 items-center justify-center rounded-md px-4 py-2 text-xs capitalize lg:min-w-[107px] lg:text-sm ${item === filter ? "bg-primary-100 text-white" : "bg-transparent"}`}>
 									{item}
 								</button>
 							))}

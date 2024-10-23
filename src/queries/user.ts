@@ -5,7 +5,7 @@ import { axios } from "@/lib"
 
 const GetAllUsersQuery = async ({ limit, page }: PaginationDto) => {
 	return await axios
-		.get<Pagination<UserProps[]>>(endpoints().users.get_all, {
+		.get<HttpResponse<Pagination<UserProps>>>(endpoints().users.get_all, {
 			params: { limit, page },
 		})
 		.then((res) => res.data)

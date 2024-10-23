@@ -10,9 +10,9 @@ const Page = () => {
 
 	return (
 		<>
-			<Seo title="Booking History" />
+			<Seo title="Edit Host" />
 			<DashboardLayout>
-				<div>User {id}</div>
+				<div>Host {id}</div>
 			</DashboardLayout>
 		</>
 	)

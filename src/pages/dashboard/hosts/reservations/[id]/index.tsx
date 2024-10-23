@@ -10,7 +10,7 @@ const Page = () => {
 
 	return (
 		<>
-			<Seo title="Host" />
+			<Seo title="Reservations" />
 			<DashboardLayout>
 				<div>Host {id}</div>
 			</DashboardLayout>

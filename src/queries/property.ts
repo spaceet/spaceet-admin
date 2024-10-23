@@ -1,4 +1,4 @@
-import { HttpResponse, Pagination, ApartmentProps } from "@/types"
+import { ApartmentProps, HttpResponse, Pagination, TimelineProps } from "@/types"
 import { endpoints } from "@/config"
 import { axios } from "@/lib"
 
@@ -10,6 +10,16 @@ export interface PaginationDto {
 export interface AddPropertyDto {}
 
 export interface SearchPropertyDto {}
+
+const GetPropertiesOverviewQuery = async (
+	limit?: number,
+	page?: number,
+	timeline?: TimelineProps
+) => {
+	return axios
+		.get<HttpResponse<any>>(endpoints().apartment.overview, { params: { limit, page, timeline } })
+		.then((res) => res.data)
+}
 
 const GetAllPropertiesQuery = async ({ limit, page }: PaginationDto) => {
 	return axios
@@ -47,6 +57,7 @@ export {
 	AddPropertyMutation,
 	DeletePropertyMutation,
 	GetAllPropertiesQuery,
+	GetPropertiesOverviewQuery,
 	GetPropertyQuery,
 	SearchPropertiesQuery,
 	UpdatePropertyMutation,

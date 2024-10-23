@@ -10,6 +10,7 @@ const endpoints = (path?: Maybe<string>) => {
 	}
 
 	const apartment = {
+		overview: `/admin/apartment/listings-overview`,
 		get_all: `/apartment`,
 		get_one: `/apartment/${path}`,
 		search: `/apartment/search`,
